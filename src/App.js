@@ -4,15 +4,19 @@ import Footer from "./components/footer";
 import MenuContainers from "./components/MenuContainers"
 
 
+import { render } from "react-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import { createGlobalStyle } from 'styled-components';
 import Lesson from "./components/lesson";
+import Signin from "./components/signinPage/sign-in";
+import NotFound from "./components/ErrorPage/notFound"
+
 
 const GlobalStyles = createGlobalStyle`
   html {
     box-sizing: border-box;
     font-size: 90%;
-
-
   }
   
   *, *:before, *:after {
@@ -24,19 +28,23 @@ const GlobalStyles = createGlobalStyle`
     height: 100vh;
   }
 `;
-export default function App() {
-  // return (
 
-// class App extends React.Component {
-//     render() {
-        return (
-            <>
-            <GlobalStyles /> 
-            <Header />
-            {/* <MenuContainers /> */}
-            <Lesson />
-            <Footer />
-            </>
-        )
+
+export default function App() {
+    return (
+        <>
+        <GlobalStyles /> 
+        <Header />
+        <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Signin />} />
+              <Route path="*" element={<NotFound />} />
+              {/* <MenuContainers /> */}
+              {/* <Lesson /> */}
+            </Routes>
+        </BrowserRouter>,
+        <Footer />
+        </>
+    )
 }
 
